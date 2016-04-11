@@ -16,6 +16,10 @@ log = logging.getLogger(__name__)
 _validate = df.validate
 
 
+class UsernamePasswordError(Exception):
+    pass
+
+
 class AttributeDict(dict):
     def __getattr__(self, name):
         try:
