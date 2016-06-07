@@ -146,6 +146,9 @@ def package_create(context, data_dict):
               errors, context.get('user'),
               data.get('name'), data_dict)
 
+    for item in plugins.PluginImplementations(plugins.IPackageController):
+        item.before_create(context, data)
+
     if errors:
         model.Session.rollback()
         raise ValidationError(errors)
@@ -520,6 +523,14 @@ def _group_or_org_create(context, data_dict, is_org=False):
     log.debug('group_create validate_errs=%r user=%s group=%s data_dict=%r',
               errors, context.get('user'), data_dict.get('name'), data_dict)
 
+    if is_org:
+        plugin_type = plugins.IOrganizationController
+    else:
+        plugin_type = plugins.IGroupController
+
+    for item in plugins.PluginImplementations(plugin_type):
+        item.before_create(context, data)
+
     if errors:
         session.rollback()
         raise ValidationError(errors)
@@ -541,11 +552,6 @@ def _group_or_org_create(context, data_dict, is_org=False):
     model.setup_default_user_roles(group, admins)
     # Needed to let extensions know the group id
     session.flush()
-
-    if is_org:
-        plugin_type = plugins.IOrganizationController
-    else:
-        plugin_type = plugins.IGroupController
 
     for item in plugins.PluginImplementations(plugin_type):
         item.create(group)
@@ -806,6 +812,9 @@ def user_create(context, data_dict):
     _check_access('user_create', context, data_dict)
 
     data, errors = _validate(data_dict, schema, context)
+
+    for item in plugins.PluginImplementations(plugins.IUserController):
+        item.before_create(context, data)
 
     if errors:
         session.rollback()

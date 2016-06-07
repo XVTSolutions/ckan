@@ -291,6 +291,15 @@ class IGroupController(Interface):
     def delete(self, entity):
         pass
 
+    def before_create(self, context, pkg_dict):
+        '''
+            Extensions will receive the validated data dict after the package
+            has been created (Note that the create method will return a package
+            domain object, which may not include all fields). Also the newly
+            created package id will be added to the dict.
+        '''
+        pass
+
     def before_view(self, pkg_dict):
         '''
              Extensions will recieve this before the group gets
@@ -326,6 +335,15 @@ class IOrganizationController(Interface):
     def delete(self, entity):
         pass
 
+    def before_create(self, context, pkg_dict):
+        '''
+            Extensions will receive the validated data dict after the package
+            has been created (Note that the create method will return a package
+            domain object, which may not include all fields). Also the newly
+            created package id will be added to the dict.
+        '''
+        pass
+
     def before_view(self, pkg_dict):
         '''
              Extensions will recieve this before the organization gets
@@ -357,6 +375,15 @@ class IPackageController(Interface):
         pass
 
     def delete(self, entity):
+        pass
+
+    def before_create(self, context, pkg_dict):
+        '''
+            Extensions will receive the validated data dict after the package
+            has been created (Note that the create method will return a package
+            domain object, which may not include all fields). Also the newly
+            created package id will be added to the dict.
+        '''
         pass
 
     def after_create(self, context, pkg_dict):
@@ -1014,5 +1041,14 @@ class IUserController(Interface):
         pass
 
     def edit(self, entity):
+        pass
+
+    def before_create(self, context, pkg_dict):
+        '''
+            Extensions will receive the validated data dict after the package
+            has been created (Note that the create method will return a package
+            domain object, which may not include all fields). Also the newly
+            created package id will be added to the dict.
+        '''
         pass
 
