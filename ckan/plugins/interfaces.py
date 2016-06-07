@@ -294,19 +294,15 @@ class IGroupController(Interface):
     #ckanext-interceptor
     def before_create(self, context, pkg_dict):
         '''
-            Extensions will receive the validated data dict after the package
-            has been created (Note that the create method will return a package
-            domain object, which may not include all fields). Also the newly
-            created package id will be added to the dict.
+            Extensions will receive the validated data dict before the group
+            has been created.
         '''
         pass
 
     def before_edit(self, context, pkg_dict):
         '''
-            Extensions will receive the validated data dict after the package
-            has been created (Note that the create method will return a package
-            domain object, which may not include all fields). Also the newly
-            created package id will be added to the dict.
+            Extensions will receive the validated data dict before the group
+            has been updated.
         '''
         pass
 
@@ -348,19 +344,15 @@ class IOrganizationController(Interface):
     #ckanext-interceptor
     def before_create(self, context, pkg_dict):
         '''
-            Extensions will receive the validated data dict after the package
-            has been created (Note that the create method will return a package
-            domain object, which may not include all fields). Also the newly
-            created package id will be added to the dict.
+            Extensions will receive the validated data dict before the organization
+            has been created.
         '''
         pass
 
     def before_edit(self, context, pkg_dict):
         '''
-            Extensions will receive the validated data dict after the package
-            has been created (Note that the create method will return a package
-            domain object, which may not include all fields). Also the newly
-            created package id will be added to the dict.
+            Extensions will receive the validated data dict before the organization
+            has been updated.
         '''
         pass
 
@@ -400,19 +392,15 @@ class IPackageController(Interface):
     #ckanext-interceptor
     def before_create(self, context, pkg_dict):
         '''
-            Extensions will receive the validated data dict after the package
-            has been created (Note that the create method will return a package
-            domain object, which may not include all fields). Also the newly
-            created package id will be added to the dict.
+            Extensions will receive the validated data dict before the package
+            has been created.
         '''
         pass
 
     def before_edit(self, context, pkg_dict):
         '''
-            Extensions will receive the validated data dict after the package
-            has been created (Note that the create method will return a package
-            domain object, which may not include all fields). Also the newly
-            created package id will be added to the dict.
+            Extensions will receive the validated data dict before the package
+            has been updated.
         '''
         pass
 
@@ -1076,19 +1064,15 @@ class IUserController(Interface):
 
     def before_create(self, context, pkg_dict):
         '''
-            Extensions will receive the validated data dict after the package
-            has been created (Note that the create method will return a package
-            domain object, which may not include all fields). Also the newly
-            created package id will be added to the dict.
+            Extensions will receive the validated data dict before the user
+            has been created.
         '''
         pass
 
     def before_edit(self, context, pkg_dict):
         '''
-            Extensions will receive the validated data dict after the package
-            has been created (Note that the create method will return a package
-            domain object, which may not include all fields). Also the newly
-            created package id will be added to the dict.
+            Extensions will receive the validated data dict before the user
+            has been updated.
         '''
         pass
 
