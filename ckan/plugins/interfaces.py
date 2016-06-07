@@ -20,6 +20,7 @@ __all__ = [
     'ITemplateHelpers',
     'IFacets',
     'IAuthenticator',
+    'IUserController',
 ]
 
 from inspect import isclass
@@ -997,3 +998,21 @@ class IAuthenticator(Interface):
         '''called on abort.  This allows aborts due to authorization issues
         to be overriden'''
         return (status_code, detail, headers, comment)
+
+class IUserController(Interface):
+    """
+    Hook into the User controller. These will
+    usually be called just before committing or returning the
+    respective object, i.e. all validation, synchronization
+    and authorization setup are complete.
+    """
+
+    def read(self, entity):
+        pass
+
+    def create(self, entity):
+        pass
+
+    def edit(self, entity):
+        pass
+

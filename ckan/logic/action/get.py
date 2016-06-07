@@ -1133,6 +1133,10 @@ def user_show(context, data_dict):
 
     user_dict = model_dictize.user_dictize(user_obj,context)
 
+    #ckanext-interceptor
+    for item in plugins.PluginImplementations(plugins.IUserController):
+        item.read(user_dict)
+
     if context.get('return_minimal'):
         return user_dict
 

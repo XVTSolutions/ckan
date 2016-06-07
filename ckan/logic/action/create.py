@@ -817,6 +817,10 @@ def user_create(context, data_dict):
     # activity_create() (below) needs it.
     session.flush()
 
+    #ckanext-interceptor
+    for item in plugins.PluginImplementations(plugins.IUserController):
+        item.create(user)
+
     activity_create_context = {
         'model': model,
         'user': context['user'],

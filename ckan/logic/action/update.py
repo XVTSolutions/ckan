@@ -644,6 +644,10 @@ def user_update(context, data_dict):
 
     user = model_save.user_dict_save(data, context)
 
+    #ckanext-interceptor
+    for item in plugins.PluginImplementations(plugins.IUserController):
+        item.edit(user)
+
     activity_dict = {
             'user_id': user.id,
             'object_id': user.id,
