@@ -291,7 +291,17 @@ class IGroupController(Interface):
     def delete(self, entity):
         pass
 
+    #ckanext-interceptor
     def before_create(self, context, pkg_dict):
+        '''
+            Extensions will receive the validated data dict after the package
+            has been created (Note that the create method will return a package
+            domain object, which may not include all fields). Also the newly
+            created package id will be added to the dict.
+        '''
+        pass
+
+    def before_edit(self, context, pkg_dict):
         '''
             Extensions will receive the validated data dict after the package
             has been created (Note that the create method will return a package
@@ -335,7 +345,17 @@ class IOrganizationController(Interface):
     def delete(self, entity):
         pass
 
+    #ckanext-interceptor
     def before_create(self, context, pkg_dict):
+        '''
+            Extensions will receive the validated data dict after the package
+            has been created (Note that the create method will return a package
+            domain object, which may not include all fields). Also the newly
+            created package id will be added to the dict.
+        '''
+        pass
+
+    def before_edit(self, context, pkg_dict):
         '''
             Extensions will receive the validated data dict after the package
             has been created (Note that the create method will return a package
@@ -377,7 +397,17 @@ class IPackageController(Interface):
     def delete(self, entity):
         pass
 
+    #ckanext-interceptor
     def before_create(self, context, pkg_dict):
+        '''
+            Extensions will receive the validated data dict after the package
+            has been created (Note that the create method will return a package
+            domain object, which may not include all fields). Also the newly
+            created package id will be added to the dict.
+        '''
+        pass
+
+    def before_edit(self, context, pkg_dict):
         '''
             Extensions will receive the validated data dict after the package
             has been created (Note that the create method will return a package
@@ -1026,6 +1056,7 @@ class IAuthenticator(Interface):
         to be overriden'''
         return (status_code, detail, headers, comment)
 
+#ckanext-interceptor
 class IUserController(Interface):
     """
     Hook into the User controller. These will
@@ -1044,6 +1075,15 @@ class IUserController(Interface):
         pass
 
     def before_create(self, context, pkg_dict):
+        '''
+            Extensions will receive the validated data dict after the package
+            has been created (Note that the create method will return a package
+            domain object, which may not include all fields). Also the newly
+            created package id will be added to the dict.
+        '''
+        pass
+
+    def before_edit(self, context, pkg_dict):
         '''
             Extensions will receive the validated data dict after the package
             has been created (Note that the create method will return a package

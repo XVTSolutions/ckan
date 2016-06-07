@@ -146,6 +146,7 @@ def package_create(context, data_dict):
               errors, context.get('user'),
               data.get('name'), data_dict)
 
+    #ckanext-interceptor
     for item in plugins.PluginImplementations(plugins.IPackageController):
         item.before_create(context, data)
 
@@ -523,6 +524,7 @@ def _group_or_org_create(context, data_dict, is_org=False):
     log.debug('group_create validate_errs=%r user=%s group=%s data_dict=%r',
               errors, context.get('user'), data_dict.get('name'), data_dict)
 
+    #ckanext-interceptor
     if is_org:
         plugin_type = plugins.IOrganizationController
     else:
@@ -813,6 +815,7 @@ def user_create(context, data_dict):
 
     data, errors = _validate(data_dict, schema, context)
 
+    #ckanext-interceptor
     for item in plugins.PluginImplementations(plugins.IUserController):
         item.before_create(context, data)
 

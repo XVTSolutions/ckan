@@ -297,6 +297,10 @@ def package_update(context, data_dict):
               context.get('package').name if context.get('package') else '',
               data)
 
+    #ckanext-interceptor
+    for item in plugins.PluginImplementations(plugins.IPackageController):
+        item.before_edit(context, data)
+
     if errors:
         model.Session.rollback()
         raise ValidationError(errors)
@@ -499,6 +503,15 @@ def _group_or_org_update(context, data_dict, is_org=False):
               context.get('group').name if context.get('group') else '',
               data_dict)
 
+    #ckanext-interceptor
+    if is_org:
+        plugin_type = plugins.IOrganizationController
+    else:
+        plugin_type = plugins.IGroupController
+
+    for item in plugins.PluginImplementations(plugin_type):
+        item.before_edit(context, data)
+
     if errors:
         session.rollback()
         raise ValidationError(errors)
@@ -519,11 +532,6 @@ def _group_or_org_update(context, data_dict, is_org=False):
             and 'api_version' not in context):
         context['prevent_packages_update'] = True
     group = model_save.group_dict_save(data, context)
-
-    if is_org:
-        plugin_type = plugins.IOrganizationController
-    else:
-        plugin_type = plugins.IGroupController
 
     for item in plugins.PluginImplementations(plugin_type):
         item.edit(group)
@@ -638,6 +646,11 @@ def user_update(context, data_dict):
     _check_access('user_update', context, data_dict)
 
     data, errors = _validate(data_dict, schema, context)
+
+    #ckanext-interceptor
+    for item in plugins.PluginImplementations(plugins.IUserController):
+        item.before_edit(context, data)
+
     if errors:
         session.rollback()
         raise ValidationError(errors)
